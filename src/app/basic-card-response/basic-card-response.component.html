@@ -1,0 +1,17 @@
+<div *ngIf="cardData">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{cardData.title}}</ion-card-title>
+      <ion-card-subtitle>{{cardData.subtitle}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{cardData.text}}</p>
+      <div *ngFor="let button of cardData.buttons">
+        <ion-button color="primary">
+          {{button.title}}
+        </ion-button>
+      </div>
+      <img src="{{cardData.image.url}}" alt="{{cardData.image.accessibilityText}}" />
+    </ion-card-content>
+  </ion-card>
+</div>

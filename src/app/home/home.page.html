@@ -7,6 +7,36 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <ion-content class="content-stable">
+    <div *ngIf="correspondence">
+      <div *ngFor="let bulk of correspondence">
+        <div *ngIf="bulk.type=='own'">
+          You said: <br>
+          {{bulk.response}}
+        </div>
+        <div *ngIf="bulk.type=='bot'">
+          Bot said: <br>
+          <div *ngFor="let reply of bulk.responses">
+            <div *ngIf="reply.type=='simple'">
+              {{reply.response}}
+            </div>
+            <div *ngIf="reply.type=='card'">
+              <app-basic-card-response [cardData]="reply.response"></app-basic-card-response>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
 </ion-content>
+<ion-footer keyboard-attach class="bar-stable item-input-inset">
+  <div *ngIf="suggestions">
+    <div *ngFor="let suggestion of suggestions">
+      <ion-button color="secondary">{{suggestion.title}}</ion-button>
+    </div>
+  </div>
+  <ion-input type="text" placeholder="Type your message" [(ngModel)]="newMessage"></ion-input>
+  <button class="button button-clear" (click)="sendMessage(newMessage)">
+    Send
+  </button>
+</ion-footer>
