@@ -17,6 +17,11 @@ export class HomePage {
     this.responseFactory = new ResponseFactory();
     this.correspondence = [];
     this.suggestions = [];
+
+    this.correspondence.push({
+      type: 'own',
+      response: 'Try the commands: \'simple\', \'rich\', \'suggest\' or \'multi\''
+    });
   }
   public correspondence: any[];
   public suggestions: any[];
@@ -27,7 +32,7 @@ export class HomePage {
     }
 
     this.correspondence.push({
-      type: "own",
+      type: 'own',
       response: newMessage
     });
 
@@ -35,7 +40,7 @@ export class HomePage {
       this.suggestions = result.response.payload.google.richResponse.suggestions;
       var items = result.response.payload.google.richResponse.items;
       var replies = {
-        type: "bot",
+        type: 'bot',
         responses: this.responseFactory.interpret(items)
       };
       this.correspondence.push(replies);
